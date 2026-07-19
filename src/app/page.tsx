@@ -65,6 +65,7 @@ const works = [
   {
     title: "推しベル",
     subtitle: "カウントダウン iOS アプリ（開発中）",
+    url: "https://oshibell.jouerworld.com/",
     description:
       "VTuber・歌い手・配信者ファン向けのカウントダウン iOS アプリ。バックエンドを持たない MVP として、UI 実装からデータ管理、ローカル通知、ウィジェット、SNS 共有画像生成までを個人で設計・実装しています。",
     tags: [
@@ -239,6 +240,16 @@ export default function Home() {
                     <Tag key={tag}>{tag}</Tag>
                   ))}
                 </div>
+                {work.url && (
+                  <a
+                    href={work.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-block text-sm text-teal-600 dark:text-teal-400 hover:underline"
+                  >
+                    {work.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
+                  </a>
+                )}
               </div>
             ))}
           </div>

@@ -1,5 +1,6 @@
 const RESUME_URL = "https://ryota-taya-jouer.github.io/ryota-taya/";
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
+const EMAIL = "ryota.taya@jouerworld.com";
 
 const skillGroups = [
   {
@@ -247,6 +248,17 @@ export default function Home() {
         <section>
           <SectionHeading id="contact" sub="Contact" title="連絡先・リンク" />
           <ul className="mt-6 flex flex-col gap-3 text-zinc-700 dark:text-zinc-300">
+            <li>
+              <span className="mr-3 inline-block w-28 text-sm text-zinc-500 dark:text-zinc-400">
+                Email
+              </span>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="text-teal-600 dark:text-teal-400 hover:underline"
+              >
+                {EMAIL}
+              </a>
+            </li>
             <li>
               <span className="mr-3 inline-block w-28 text-sm text-zinc-500 dark:text-zinc-400">
                 GitHub

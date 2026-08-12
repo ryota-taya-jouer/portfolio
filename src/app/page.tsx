@@ -61,7 +61,43 @@ const skillGroups = [
   },
 ];
 
-const works = [
+type Work = {
+  title: string;
+  subtitle: string;
+  url?: string;
+  description: string;
+  tags: string[];
+  /** 公開デモの案内（アカウントと注意書き） */
+  demo?: { email: string; password: string; note: string };
+  /** デモ動画（public/ 配下のパス） */
+  videoSrc?: string;
+};
+
+const works: Work[] = [
+  {
+    title: "SoloOps",
+    subtitle: "個人事業者向け 案件・請求管理 Web サービス（公開デモ）",
+    url: "https://solops.jouerworld.com/",
+    description:
+      "副業・フリーランスのクライアント、案件、稼働時間、請求書、入金を一元管理する Web アプリケーション。要件定義書・画面仕様・データモデル・ADR の作成から、Django REST Framework / Next.js による実装（Session 認証、マルチテナント分離、楽観的ロック、請求書 PDF 生成、監査ログ）、Terraform による AWS サーバーレス構成（CloudFront + Lambda + Aurora Serverless v2）の構築・運用まで、全工程を個人で行っています。バックエンド 600 件超・フロントエンド 430 件超の自動テストと Playwright による E2E を整備しています。",
+    tags: [
+      "Django REST Framework",
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "AWS Lambda",
+      "Aurora Serverless v2",
+      "CloudFront",
+      "Terraform",
+      "Playwright",
+    ],
+    demo: {
+      email: "demo@soloops.example.com",
+      password: "DemoPassw0rd!",
+      note: "サンプルデータ入りのデモアカウントです。コスト最適化のためサーバーを自動停止しており、初回アクセスには 15 秒ほどかかります。",
+    },
+    videoSrc: "/videos/soloops-demo.mp4",
+  },
   {
     title: "推しベル",
     subtitle: "カウントダウン iOS アプリ（開発中）",
@@ -249,6 +285,32 @@ export default function Home() {
                   >
                     {work.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
                   </a>
+                )}
+                {work.demo && (
+                  <div className="mt-4 rounded-lg bg-zinc-100 dark:bg-zinc-800/60 px-4 py-3 text-sm text-zinc-600 dark:text-zinc-400">
+                    <p>
+                      デモアカウント：
+                      <code className="font-mono text-zinc-800 dark:text-zinc-200">
+                        {work.demo.email}
+                      </code>
+                      <span className="mx-1">／</span>
+                      <code className="font-mono text-zinc-800 dark:text-zinc-200">
+                        {work.demo.password}
+                      </code>
+                    </p>
+                    <p className="mt-1">{work.demo.note}</p>
+                  </div>
+                )}
+                {work.videoSrc && (
+                  <video
+                    controls
+                    preload="metadata"
+                    playsInline
+                    className="mt-4 w-full rounded-lg border border-zinc-200 dark:border-zinc-800"
+                    src={work.videoSrc}
+                  >
+                    お使いのブラウザは動画再生に対応していません。
+                  </video>
                 )}
               </div>
             ))}

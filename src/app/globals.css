@@ -1,22 +1,49 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* 案A「ブロック・エディトリアル」: JOUER ロゴの3色（ミント/ネイビー/シアン）と
+   ブロック状の造形（直角）をサイト全体の設計言語にする。 */
 :root {
-  --background: #fafafa;
-  --foreground: #1c1c1e;
+  --background: #dfe6ee; /* ロゴのグラウンド #dbe3eb に揃えた淡ブルーグレー */
+  --foreground: #33475c;
+  --surface: #ffffff;
+  --heading: #0a3a6e; /* ロゴのネイビー */
+  --muted: #5c7288;
+  --line: #b9c8d6;
+  --accent: #0f7bb0; /* ロゴのシアン #1690c8 を本文リンク用に暗めに調整 */
+  --cyan: #1690c8; /* 装飾（カード左罫など）はロゴ原色のまま */
+  --mint: #1fe3a4;
+  --navy: #0a3a6e;
+  --inset: #edf1f6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-heading: var(--heading);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-cyan: var(--cyan);
+  --color-mint: var(--mint);
+  --color-navy: var(--navy);
+  --color-inset: var(--inset);
   --font-sans: var(--font-noto-sans-jp);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0e1116;
-    --foreground: #e6e6e9;
+    --background: #081c31; /* ネイビー地に反転 */
+    --foreground: #c3d3e2;
+    --surface: #0e2a47;
+    --heading: #dce9f5;
+    --muted: #8fa5ba;
+    --line: #24405d;
+    --accent: #57c1ec;
+    --mint: #2ee8ab;
+    --inset: #0a2440;
   }
 }
 
@@ -34,9 +61,16 @@ body {
 }
 
 @media print {
+  /* PDF・印刷は常にライトの配色で出力する */
   :root {
     --background: #ffffff;
-    --foreground: #1c1c1e;
+    --foreground: #33475c;
+    --surface: #ffffff;
+    --heading: #0a3a6e;
+    --muted: #5c7288;
+    --line: #b9c8d6;
+    --accent: #0f7bb0;
+    --inset: #edf1f6;
   }
 
   .prose h2,

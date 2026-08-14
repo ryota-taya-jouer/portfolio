@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BlockLogo } from "../block-logo";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -25,23 +26,24 @@ export default async function ResumePage() {
 
   return (
     <div className="mx-auto w-full max-w-4xl px-6">
-      <header className="sticky top-0 z-10 -mx-6 border-b border-zinc-200/70 dark:border-zinc-800/70 bg-[var(--background)]/85 px-6 py-4 backdrop-blur print:hidden">
+      <header className="sticky top-0 z-10 -mx-6 border-b border-line bg-[var(--background)]/85 px-6 py-4 backdrop-blur print:hidden">
         <nav className="flex items-center justify-between">
-          <Link href="/" className="font-bold tracking-wide">
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-bold tracking-wide text-heading"
+          >
+            <BlockLogo size={18} />
             Ryota Taya
           </Link>
-          <div className="flex items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="flex items-center gap-5 text-sm text-muted">
             <a
               href="/resume.pdf"
               download="職務経歴書_田矢凌太.pdf"
-              className="hover:text-teal-600 dark:hover:text-teal-400"
+              className="hover:text-accent"
             >
               PDF をダウンロード
             </a>
-            <Link
-              href="/"
-              className="hover:text-teal-600 dark:hover:text-teal-400"
-            >
+            <Link href="/" className="hover:text-accent">
               ← ポートフォリオへ戻る
             </Link>
           </div>
@@ -49,15 +51,18 @@ export default async function ResumePage() {
       </header>
 
       <main
-        className="prose prose-zinc dark:prose-invert max-w-none py-12 print:py-0
-          prose-headings:font-bold
+        className="prose max-w-none py-12 print:py-0
+          prose-headings:font-bold prose-headings:text-heading
+          prose-p:text-foreground prose-li:text-foreground
+          prose-strong:text-heading prose-code:text-foreground
+          prose-th:text-heading prose-td:text-foreground
           prose-h1:text-3xl sm:prose-h1:text-4xl
-          prose-h2:mt-14 prose-h2:border-b prose-h2:border-zinc-200 dark:prose-h2:border-zinc-800 prose-h2:pb-2
-          prose-h4:text-teal-700 dark:prose-h4:text-teal-400
-          prose-a:text-teal-600 dark:prose-a:text-teal-400
+          prose-h2:mt-14 prose-h2:border-b prose-h2:border-line prose-h2:pb-2
+          prose-h4:text-accent
+          prose-a:text-accent
           prose-table:text-sm
           prose-th:whitespace-nowrap
-          prose-hr:border-zinc-200 dark:prose-hr:border-zinc-800"
+          prose-hr:border-line"
       >
         <Markdown
           remarkPlugins={[remarkGfm]}
@@ -79,7 +84,7 @@ export default async function ResumePage() {
         </Markdown>
       </main>
 
-      <footer className="border-t border-zinc-200 dark:border-zinc-800 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400 print:hidden">
+      <footer className="border-t border-line py-8 text-center text-sm text-muted print:hidden">
         © 2026 Ryota Taya
       </footer>
     </div>

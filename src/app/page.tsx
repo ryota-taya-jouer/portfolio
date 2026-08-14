@@ -1,3 +1,5 @@
+import { BlockLogo } from "./block-logo";
+
 const RESUME_URL = "/resume";
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
 const EMAIL = "ryota.taya@jouerworld.com";
@@ -71,17 +73,18 @@ const works: Work[] = [
 function SectionHeading({ id, title, sub }: { id: string; title: string; sub: string }) {
   return (
     <div id={id} className="scroll-mt-24">
-      <p className="font-mono text-sm tracking-widest text-teal-600 dark:text-teal-400 uppercase">
+      <p className="font-mono text-sm tracking-widest text-accent uppercase">
+        <span className="mr-2.5 inline-block h-2.5 w-2.5 bg-mint" aria-hidden="true" />
         {sub}
       </p>
-      <h2 className="mt-1 text-2xl sm:text-3xl font-bold">{title}</h2>
+      <h2 className="mt-1 text-2xl sm:text-3xl font-bold text-heading">{title}</h2>
     </div>
   );
 }
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block rounded-full border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-1 text-xs text-zinc-700 dark:text-zinc-300">
+    <span className="inline-block border border-line bg-surface px-3 py-1 text-xs text-foreground">
       {children}
     </span>
   );
@@ -91,19 +94,20 @@ export default function Home() {
   return (
     <div className="mx-auto w-full max-w-4xl px-6">
       {/* Header */}
-      <header className="sticky top-0 z-10 -mx-6 mb-4 border-b border-zinc-200/70 dark:border-zinc-800/70 bg-[var(--background)]/85 px-6 py-4 backdrop-blur">
+      <header className="sticky top-0 z-10 -mx-6 mb-4 border-b border-line bg-[var(--background)]/85 px-6 py-4 backdrop-blur">
         <nav className="flex items-center justify-between">
-          <a href="#top" className="font-bold tracking-wide">
+          <a href="#top" className="flex items-center gap-2 font-bold tracking-wide text-heading">
+            <BlockLogo size={18} />
             Ryota Taya
           </a>
-          <div className="flex items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400">
-            <a href="#skills" className="hover:text-teal-600 dark:hover:text-teal-400">
+          <div className="flex items-center gap-5 text-sm text-muted">
+            <a href="#skills" className="hover:text-accent">
               Skills
             </a>
-            <a href="#works" className="hover:text-teal-600 dark:hover:text-teal-400">
+            <a href="#works" className="hover:text-accent">
               Works
             </a>
-            <a href="#contact" className="hover:text-teal-600 dark:hover:text-teal-400">
+            <a href="#contact" className="hover:text-accent">
               Contact
             </a>
           </div>
@@ -112,38 +116,43 @@ export default function Home() {
 
       <main id="top" className="flex flex-col gap-24 pb-24">
         {/* Hero */}
-        <section className="pt-16 sm:pt-24">
-          <p className="font-mono text-teal-600 dark:text-teal-400">
-            Web Engineer — Backend / Infrastructure
-          </p>
-          <h1 className="mt-3 text-4xl sm:text-5xl font-bold leading-tight">
-            田矢 凌太
-            <span className="ml-3 text-xl sm:text-2xl font-medium text-zinc-500 dark:text-zinc-400">
-              Ryota Taya
-            </span>
-          </h1>
-          <p className="mt-6 max-w-2xl leading-relaxed text-zinc-700 dark:text-zinc-300">
-            Python／Django を中心とした Web バックエンド開発、AWS
-            を利用したインフラ構築・運用、Stripe
-            を利用した決済機能の開発を得意とするエンジニアです。現在は Next.js
-            や SwiftUI、AI コーディングエージェントも活用し、Web サービスと iOS
-            アプリの個人開発にも取り組んでいます。
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href={RESUME_URL}
-              className="rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-500"
-            >
-              職務経歴書を見る
-            </a>
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-zinc-300 dark:border-zinc-700 px-5 py-2.5 text-sm font-medium hover:border-teal-600 hover:text-teal-600 dark:hover:border-teal-400 dark:hover:text-teal-400"
-            >
-              GitHub
-            </a>
+        <section className="flex items-start justify-between gap-8 pt-16 sm:pt-24">
+          <div>
+            <p className="font-mono text-accent">
+              Web Engineer — Backend / Infrastructure
+            </p>
+            <h1 className="mt-3 text-4xl sm:text-5xl font-bold leading-tight text-heading">
+              田矢 凌太
+              <span className="ml-3 text-xl sm:text-2xl font-medium text-muted">
+                Ryota Taya
+              </span>
+            </h1>
+            <p className="mt-6 max-w-2xl leading-relaxed">
+              Python／Django を中心とした Web バックエンド開発、AWS
+              を利用したインフラ構築・運用、Stripe
+              を利用した決済機能の開発を得意とするエンジニアです。現在は Next.js
+              や SwiftUI、AI コーディングエージェントも活用し、Web サービスと iOS
+              アプリの個人開発にも取り組んでいます。
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href={RESUME_URL}
+                className="bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0d4a8c] dark:bg-mint dark:text-navy dark:hover:bg-[#54eebc]"
+              >
+                職務経歴書を見る
+              </a>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-2 border-navy px-5 py-2.5 text-sm font-medium text-navy hover:border-accent hover:text-accent dark:border-line dark:text-foreground dark:hover:border-accent dark:hover:text-accent"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+          <div className="hidden pt-6 sm:block">
+            <BlockLogo size={132} />
           </div>
         </section>
 
@@ -155,12 +164,9 @@ export default function Home() {
               <Tag key={skill}>{skill}</Tag>
             ))}
           </div>
-          <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
+          <p className="mt-4 text-sm text-muted">
             スキルの一覧と詳細な経験区分は
-            <a
-              href={RESUME_URL}
-              className="mx-1 text-teal-600 dark:text-teal-400 hover:underline"
-            >
+            <a href={RESUME_URL} className="mx-1 text-accent hover:underline">
               職務経歴書
             </a>
             を参照してください。
@@ -174,17 +180,15 @@ export default function Home() {
             {works.map((work) => (
               <div
                 key={work.title}
-                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6"
+                className="border border-line border-l-4 border-l-cyan bg-surface p-6"
               >
-                <h3 className="text-xl font-bold">
+                <h3 className="text-xl font-bold text-heading">
                   {work.title}
-                  <span className="ml-3 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  <span className="ml-3 text-sm font-medium text-muted">
                     {work.subtitle}
                   </span>
                 </h3>
-                <p className="mt-3 leading-relaxed text-zinc-700 dark:text-zinc-300">
-                  {work.description}
-                </p>
+                <p className="mt-3 leading-relaxed">{work.description}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {work.tags.map((tag) => (
                     <Tag key={tag}>{tag}</Tag>
@@ -195,20 +199,20 @@ export default function Home() {
                     href={work.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-block text-sm text-teal-600 dark:text-teal-400 hover:underline"
+                    className="mt-4 inline-block text-sm font-medium text-accent hover:underline"
                   >
                     {work.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
                   </a>
                 )}
                 {work.demo && (
-                  <div className="mt-4 rounded-lg bg-zinc-100 dark:bg-zinc-800/60 px-4 py-3 text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="mt-4 bg-inset px-4 py-3 text-sm text-muted">
                     <p>
                       デモアカウント：
-                      <code className="font-mono text-zinc-800 dark:text-zinc-200">
+                      <code className="font-mono text-foreground">
                         {work.demo.email}
                       </code>
                       <span className="mx-1">／</span>
-                      <code className="font-mono text-zinc-800 dark:text-zinc-200">
+                      <code className="font-mono text-foreground">
                         {work.demo.password}
                       </code>
                     </p>
@@ -220,7 +224,7 @@ export default function Home() {
                     controls
                     preload="metadata"
                     playsInline
-                    className="mt-4 w-full rounded-lg border border-zinc-200 dark:border-zinc-800"
+                    className="mt-4 w-full border border-line"
                     src={work.videoSrc}
                   >
                     お使いのブラウザは動画再生に対応していません。
@@ -229,12 +233,9 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
+          <p className="mt-4 text-sm text-muted">
             各作品の担当工程・実装内容の詳細は
-            <a
-              href={RESUME_URL}
-              className="mx-1 text-teal-600 dark:text-teal-400 hover:underline"
-            >
+            <a href={RESUME_URL} className="mx-1 text-accent hover:underline">
               職務経歴書
             </a>
             を参照してください。
@@ -244,39 +245,33 @@ export default function Home() {
         {/* Contact */}
         <section>
           <SectionHeading id="contact" sub="Contact" title="連絡先・リンク" />
-          <ul className="mt-6 flex flex-col gap-3 text-zinc-700 dark:text-zinc-300">
+          <ul className="mt-6 flex flex-col gap-3">
             <li>
-              <span className="mr-3 inline-block w-28 text-sm text-zinc-500 dark:text-zinc-400">
+              <span className="mr-3 inline-block w-28 text-sm text-muted">
                 Email
               </span>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="text-teal-600 dark:text-teal-400 hover:underline"
-              >
+              <a href={`mailto:${EMAIL}`} className="text-accent hover:underline">
                 {EMAIL}
               </a>
             </li>
             <li>
-              <span className="mr-3 inline-block w-28 text-sm text-zinc-500 dark:text-zinc-400">
+              <span className="mr-3 inline-block w-28 text-sm text-muted">
                 GitHub
               </span>
               <a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-teal-600 dark:text-teal-400 hover:underline"
+                className="text-accent hover:underline"
               >
                 github.com/ryota-taya-jouer
               </a>
             </li>
             <li>
-              <span className="mr-3 inline-block w-28 text-sm text-zinc-500 dark:text-zinc-400">
+              <span className="mr-3 inline-block w-28 text-sm text-muted">
                 職務経歴書
               </span>
-              <a
-                href={RESUME_URL}
-                className="text-teal-600 dark:text-teal-400 hover:underline"
-              >
+              <a href={RESUME_URL} className="text-accent hover:underline">
                 職務経歴書を見る
               </a>
             </li>
@@ -284,7 +279,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-zinc-200 dark:border-zinc-800 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
+      <footer className="border-t border-line py-8 text-center text-sm text-muted">
         © 2026 Ryota Taya
       </footer>
     </div>

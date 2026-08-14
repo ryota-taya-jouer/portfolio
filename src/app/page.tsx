@@ -2,63 +2,17 @@ const RESUME_URL = "/resume";
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
 const EMAIL = "ryota.taya@jouerworld.com";
 
-const skillGroups = [
-  {
-    title: "バックエンド",
-    note: "実務",
-    skills: [
-      "Python",
-      "Django / Django REST Framework",
-      "REST API 設計・開発",
-      "JWT / HMAC 認証",
-      "バッチ処理・非同期処理",
-      "FastAPI",
-    ],
-  },
-  {
-    title: "フロントエンド",
-    note: "実務",
-    skills: ["Next.js", "React", "TypeScript / JavaScript", "HTML / CSS"],
-  },
-  {
-    title: "インフラ・クラウド",
-    note: "実務",
-    skills: [
-      "AWS (EC2, Aurora, Lambda, EventBridge, CloudWatch, SAM)",
-      "Docker / Docker Compose",
-      "GitHub Actions (CI/CD)",
-      "Nginx / uWSGI / Linux",
-    ],
-  },
-  {
-    title: "決済",
-    note: "実務",
-    skills: [
-      "Stripe (PaymentIntent, Invoice, Subscription, Webhook)",
-      "継続課金・請求書発行",
-      "決済失敗リトライ・二重決済対策",
-    ],
-  },
-  {
-    title: "テスト・品質管理",
-    note: "実務",
-    skills: [
-      "pytest",
-      "Playwright / Selenium (E2E)",
-      "ruff / pre-commit",
-      "CloudWatch Logs Insights (障害調査)",
-    ],
-  },
-  {
-    title: "モバイル・AI",
-    note: "個人開発",
-    skills: [
-      "Swift / SwiftUI / SwiftData",
-      "WidgetKit・ローカル通知",
-      "Claude Code / OpenAI API",
-      "RAG・ベクトル検索 (pgvector)",
-    ],
-  },
+const coreSkills = [
+  "Python",
+  "Django / Django REST Framework",
+  "AWS",
+  "Stripe",
+  "Docker",
+  "GitHub Actions (CI/CD)",
+  "Next.js / TypeScript",
+  "Swift / SwiftUI",
+  "pytest / Playwright",
+  "AI コーディングエージェント",
 ];
 
 type Work = {
@@ -79,7 +33,7 @@ const works: Work[] = [
     subtitle: "個人事業者向け 案件・請求管理 Web サービス（公開デモ）",
     url: "https://solops.jouerworld.com/",
     description:
-      "副業・フリーランスのクライアント、案件、稼働時間、請求書、入金を一元管理する Web アプリケーション。要件定義書・画面仕様・データモデル・ADR の作成から、Django REST Framework / Next.js による実装（Session 認証、マルチテナント分離、楽観的ロック、請求書 PDF 生成、監査ログ）、Terraform による AWS サーバーレス構成（CloudFront + Lambda + Aurora Serverless v2）の構築・運用まで、全工程を個人で行っています。バックエンド 600 件超・フロントエンド 430 件超の自動テストと Playwright による E2E を整備しています。",
+      "副業・フリーランスのクライアント、案件、稼働時間、請求書、入金を一元管理する Web サービス。要件定義から実装、AWS サーバーレス構成の構築・運用まで、全工程を個人で担当しています。",
     tags: [
       "Django REST Framework",
       "Next.js",
@@ -143,9 +97,6 @@ export default function Home() {
             Ryota Taya
           </a>
           <div className="flex items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400">
-            <a href="#about" className="hover:text-teal-600 dark:hover:text-teal-400">
-              About
-            </a>
             <a href="#skills" className="hover:text-teal-600 dark:hover:text-teal-400">
               Skills
             </a>
@@ -196,49 +147,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About */}
-        <section>
-          <SectionHeading id="about" sub="About" title="自己紹介" />
-          <div className="mt-6 flex flex-col gap-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
-            <p>
-              EC サイト・Web
-              サービスの開発において、要件整理、設計、実装、テスト、デプロイ、監視・障害調査まで幅広い工程に対応してきました。特に、Django
-              を用いた API・業務ロジックの実装、Stripe 決済、AWS Lambda
-              による定期バッチ、CloudWatch を用いたログ調査、GitHub Actions
-              による CI/CD 整備を得意としています。
-            </p>
-            <p>
-              AI が生成したコードをそのまま採用するのではなく、仕様との整合性、保守性、セキュリティ、テスト結果を確認しながら開発を進めるスタイルで、Claude
-              Code などの AI 開発支援ツールを活用した開発プロセスの効率化にも取り組んでいます。
-            </p>
-          </div>
-        </section>
-
         {/* Skills */}
         <section>
           <SectionHeading id="skills" sub="Skills" title="テクニカルスキル" />
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {skillGroups.map((group) => (
-              <div
-                key={group.title}
-                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5"
-              >
-                <div className="flex items-baseline justify-between">
-                  <h3 className="font-bold">{group.title}</h3>
-                  <span className="text-xs text-teal-600 dark:text-teal-400">
-                    {group.note}
-                  </span>
-                </div>
-                <ul className="mt-3 flex flex-col gap-1.5 text-sm text-zinc-600 dark:text-zinc-400">
-                  {group.skills.map((skill) => (
-                    <li key={skill}>{skill}</li>
-                  ))}
-                </ul>
-              </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {coreSkills.map((skill) => (
+              <Tag key={skill}>{skill}</Tag>
             ))}
           </div>
           <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
-            スキルの詳細な経験区分は
+            スキルの一覧と詳細な経験区分は
             <a
               href={RESUME_URL}
               className="mx-1 text-teal-600 dark:text-teal-400 hover:underline"
@@ -311,6 +229,16 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-500">
+            各作品の担当工程・実装内容の詳細は
+            <a
+              href={RESUME_URL}
+              className="mx-1 text-teal-600 dark:text-teal-400 hover:underline"
+            >
+              職務経歴書
+            </a>
+            を参照してください。
+          </p>
         </section>
 
         {/* Contact */}

@@ -1,4 +1,4 @@
-const RESUME_URL = "https://ryota-taya-jouer.github.io/ryota-taya/";
+const RESUME_URL = "/resume";
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
 const EMAIL = "ryota.taya@jouerworld.com";
 
@@ -181,8 +181,6 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href={RESUME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-teal-500"
             >
               職務経歴書を見る
@@ -243,8 +241,6 @@ export default function Home() {
             スキルの詳細な経験区分は
             <a
               href={RESUME_URL}
-              target="_blank"
-              rel="noopener noreferrer"
               className="mx-1 text-teal-600 dark:text-teal-400 hover:underline"
             >
               職務経歴書
@@ -351,11 +347,9 @@ export default function Home() {
               </span>
               <a
                 href={RESUME_URL}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="text-teal-600 dark:text-teal-400 hover:underline"
               >
-                ryota-taya-jouer.github.io/ryota-taya
+                職務経歴書を見る
               </a>
             </li>
           </ul>

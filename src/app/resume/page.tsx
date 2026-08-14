@@ -1,0 +1,77 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import type { Metadata } from "next";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+export const metadata: Metadata = {
+  title: "職務経歴書 | Ryota Taya",
+  description: "田矢 凌太（Ryota Taya）の職務経歴書",
+  // 経歴書は portfolio 本体より詳細なため検索エンジンには載せない
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: { index: false, follow: false },
+  },
+};
+
+export default async function ResumePage() {
+  const source = await fs.readFile(
+    path.join(process.cwd(), "src/content/resume.md"),
+    "utf8",
+  );
+
+  return (
+    <div className="mx-auto w-full max-w-4xl px-6">
+      <header className="sticky top-0 z-10 -mx-6 border-b border-zinc-200/70 dark:border-zinc-800/70 bg-[var(--background)]/85 px-6 py-4 backdrop-blur">
+        <nav className="flex items-center justify-between">
+          <a href="/" className="font-bold tracking-wide">
+            Ryota Taya
+          </a>
+          <a
+            href="/"
+            className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400"
+          >
+            ← ポートフォリオへ戻る
+          </a>
+        </nav>
+      </header>
+
+      <main
+        className="prose prose-zinc dark:prose-invert max-w-none py-12
+          prose-headings:font-bold
+          prose-h1:text-3xl sm:prose-h1:text-4xl
+          prose-h2:mt-14 prose-h2:border-b prose-h2:border-zinc-200 dark:prose-h2:border-zinc-800 prose-h2:pb-2
+          prose-h4:text-teal-700 dark:prose-h4:text-teal-400
+          prose-a:text-teal-600 dark:prose-a:text-teal-400
+          prose-table:text-sm
+          prose-th:whitespace-nowrap
+          prose-hr:border-zinc-200 dark:prose-hr:border-zinc-800"
+      >
+        <Markdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            // 横に長いスキル表がモバイルでページごと溢れないようにする
+            table: ({ children }) => (
+              <div className="overflow-x-auto">
+                <table>{children}</table>
+              </div>
+            ),
+            a: ({ href, children }) => (
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                {children}
+              </a>
+            ),
+          }}
+        >
+          {source}
+        </Markdown>
+      </main>
+
+      <footer className="border-t border-zinc-200 dark:border-zinc-800 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
+        © 2026 Ryota Taya
+      </footer>
+    </div>
+  );
+}

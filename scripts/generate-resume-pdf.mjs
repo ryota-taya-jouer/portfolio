@@ -58,6 +58,9 @@ const server = createServer(async (req, res) => {
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const url = `http://127.0.0.1:${server.address().port}/resume`;
 
+// 旧 PDF が残っていると下の「サイズ安定 = 完了」判定が誤爆するため必ず消してから生成する
+await rm(pdfPath, { force: true });
+
 // 起動中の Chrome とプロファイルが衝突しないよう使い捨ての user-data-dir を使う
 const profile = await mkdtemp(path.join(tmpdir(), "resume-pdf-"));
 const args = [

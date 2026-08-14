@@ -26,3 +26,27 @@ body {
   font-family: var(--font-noto-sans-jp), "Hiragino Sans", "Yu Gothic UI",
     sans-serif;
 }
+
+/* PDF 生成（scripts/generate-resume-pdf.mjs）・ブラウザ印刷用 */
+@page {
+  size: A4;
+  margin: 14mm 12mm;
+}
+
+@media print {
+  :root {
+    --background: #ffffff;
+    --foreground: #1c1c1e;
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    break-after: avoid;
+  }
+
+  .prose table,
+  .prose li {
+    break-inside: avoid;
+  }
+}

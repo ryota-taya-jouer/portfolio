@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { Metadata } from "next";
+import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -24,22 +25,31 @@ export default async function ResumePage() {
 
   return (
     <div className="mx-auto w-full max-w-4xl px-6">
-      <header className="sticky top-0 z-10 -mx-6 border-b border-zinc-200/70 dark:border-zinc-800/70 bg-[var(--background)]/85 px-6 py-4 backdrop-blur">
+      <header className="sticky top-0 z-10 -mx-6 border-b border-zinc-200/70 dark:border-zinc-800/70 bg-[var(--background)]/85 px-6 py-4 backdrop-blur print:hidden">
         <nav className="flex items-center justify-between">
-          <a href="/" className="font-bold tracking-wide">
+          <Link href="/" className="font-bold tracking-wide">
             Ryota Taya
-          </a>
-          <a
-            href="/"
-            className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-teal-600 dark:hover:text-teal-400"
-          >
-            ← ポートフォリオへ戻る
-          </a>
+          </Link>
+          <div className="flex items-center gap-5 text-sm text-zinc-600 dark:text-zinc-400">
+            <a
+              href="/resume.pdf"
+              download="職務経歴書_田矢凌太.pdf"
+              className="hover:text-teal-600 dark:hover:text-teal-400"
+            >
+              PDF をダウンロード
+            </a>
+            <Link
+              href="/"
+              className="hover:text-teal-600 dark:hover:text-teal-400"
+            >
+              ← ポートフォリオへ戻る
+            </Link>
+          </div>
         </nav>
       </header>
 
       <main
-        className="prose prose-zinc dark:prose-invert max-w-none py-12
+        className="prose prose-zinc dark:prose-invert max-w-none py-12 print:py-0
           prose-headings:font-bold
           prose-h1:text-3xl sm:prose-h1:text-4xl
           prose-h2:mt-14 prose-h2:border-b prose-h2:border-zinc-200 dark:prose-h2:border-zinc-800 prose-h2:pb-2
@@ -69,7 +79,7 @@ export default async function ResumePage() {
         </Markdown>
       </main>
 
-      <footer className="border-t border-zinc-200 dark:border-zinc-800 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
+      <footer className="border-t border-zinc-200 dark:border-zinc-800 py-8 text-center text-sm text-zinc-500 dark:text-zinc-400 print:hidden">
         © 2026 Ryota Taya
       </footer>
     </div>

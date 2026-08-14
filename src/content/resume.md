@@ -164,7 +164,6 @@ EC サイト・Web サービスの開発において、要件整理、設計、�
 | モバイル（iOS） | Swift, SwiftUI, SwiftData, UserDefaults, FileManager, ローカル通知, WidgetKit, Firebase Analytics/Crashlytics, App Store Connect Analytics | 個人開発 |
 | Google Cloud | Cloud Run, Cloud Functions, Cloud Logging, Cloud Monitoring, Pub/Sub, Cloud Tasks, Firebase Hosting/Analytics/Crashlytics | 個人開発／検証 |
 | AI・LLM | OpenAI API, Claude, Claude Code, ChatGPT, Codex, GitHub Copilot, Cursor, Devin, OpenHands, LangChain, LangGraph, RAG, ベクトル検索, pgvector, MCP 調査・検証 | 個人開発／実務（開発支援） |
-| 検証・学習 | Zustand, Material UI, Tailwind CSS, Chakra UI, React Native, Expo, Flutter, Terraform, Kubernetes, OpenTelemetry, Prometheus, Grafana, MLflow, Hugging Face Transformers, Ollama, llama.cpp, CrewAI, AutoGen, MetaGPT, Weblate, Redis, MLOps, Feature Flag, A/B テスト | 検証 |
 
 ---
 

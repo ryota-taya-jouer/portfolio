@@ -210,8 +210,15 @@ Claude Code、ChatGPT、Codex、GitHub Copilot などを利用し、要件整理
   - バックエンド 600 件超・フロントエンド 430 件超の自動テストと、Playwright による E2E テストの整備
 - **技術**: Python, Django REST Framework, TypeScript, Next.js, PostgreSQL, AWS（Lambda, Aurora Serverless v2, CloudFront）, Terraform, Playwright
 
-### 推しベル（カウントダウン iOS アプリ）
+### 推しベル（カウントダウン iOS アプリ・開発中）
 
-VTuber・歌い手・配信者ファン向けのカウントダウン iOS アプリ「推しベル」を開発しています。バックエンドを持たない MVP として、SwiftUI による UI 実装、SwiftData によるデータ管理、ローカル通知、ウィジェット、SNS 共有画像生成などの設計・実装を進めています。
+VTuber・歌い手・配信者ファン向けのカウントダウン iOS アプリ「推しベル」を開発しています。バックエンドを持たない MVP として、UI 実装からデータ管理、通知、ウィジェット、SNS 共有まで、設計・実装を個人で進めています。
 
+- **公式サイト**: https://oshibell.jouerworld.com/
+- **担当工程**: 企画 ・ 設計 ・ 実装 ・ テスト
+- **主な実装内容**:
+  - SwiftUI による UI 実装と SwiftData によるデータ管理
+  - ローカル通知・WidgetKit によるウィジェット
+  - SNS 共有画像の生成
+  - Firebase Analytics／Crashlytics・App Store Connect Analytics による利用状況・クラッシュの計測
 - **技術**: Swift, SwiftUI, SwiftData, UserDefaults, FileManager, iOS ローカル通知, WidgetKit, Firebase Analytics, Firebase Crashlytics, App Store Connect Analytics

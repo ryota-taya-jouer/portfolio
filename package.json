@@ -10,6 +10,7 @@
     "pdf": "next build && node scripts/generate-resume-pdf.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.10",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-dom": "19.2.4",

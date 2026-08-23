@@ -1,74 +1,9 @@
 import { BlockLogo } from "./block-logo";
+import { LocaleSwitch } from "./locale-switch";
+import { homeDictionaries, paths, type Locale } from "@/i18n/dictionaries";
 
-const RESUME_URL = "/resume";
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
 const EMAIL = "ryota.taya@jouerworld.com";
-
-const coreSkills = [
-  "Python",
-  "Django / Django REST Framework",
-  "AWS",
-  "Stripe",
-  "Docker",
-  "GitHub Actions (CI/CD)",
-  "Next.js / TypeScript",
-  "Swift / SwiftUI",
-  "pytest / Playwright",
-  "AI コーディングエージェント",
-];
-
-type Work = {
-  title: string;
-  subtitle: string;
-  url?: string;
-  description: string;
-  tags: string[];
-  /** 公開デモの案内（アカウントと注意書き） */
-  demo?: { email: string; password: string; note: string };
-  /** デモ動画（public/ 配下のパス） */
-  videoSrc?: string;
-};
-
-const works: Work[] = [
-  {
-    title: "SoloOps",
-    subtitle: "個人事業者向け 案件・請求管理 Web サービス（公開デモ）",
-    url: "https://solops.jouerworld.com/",
-    description:
-      "副業・フリーランスのクライアント、案件、稼働時間、請求書、入金を一元管理する Web サービス。要件定義から実装、AWS サーバーレス構成の構築・運用まで、全工程を個人で担当しています。",
-    tags: [
-      "Django REST Framework",
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "AWS Lambda",
-      "Aurora Serverless v2",
-      "CloudFront",
-      "Terraform",
-      "Playwright",
-    ],
-    demo: {
-      email: "demo@soloops.example.com",
-      password: "DemoPassw0rd!",
-      note: "サンプルデータ入りのデモアカウントです。コスト最適化のためサーバーを自動停止しており、初回アクセスには 15 秒ほどかかります。",
-    },
-    videoSrc: "/videos/soloops-demo.mp4",
-  },
-  {
-    title: "推しベル",
-    subtitle: "カウントダウン iOS アプリ（開発中）",
-    url: "https://oshibell.jouerworld.com/",
-    description:
-      "VTuber・歌い手・配信者ファン向けのカウントダウン iOS アプリ。バックエンドを持たない MVP として、UI 実装からデータ管理、ローカル通知、ウィジェット、SNS 共有画像生成までを個人で設計・実装しています。",
-    tags: [
-      "Swift",
-      "SwiftUI",
-      "SwiftData",
-      "WidgetKit",
-      "Firebase Analytics / Crashlytics",
-    ],
-  },
-];
 
 function SectionHeading({ id, title, sub }: { id: string; title: string; sub: string }) {
   return (
@@ -90,7 +25,10 @@ function Tag({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function Home() {
+export function HomePage({ locale }: { locale: Locale }) {
+  const dict = homeDictionaries[locale];
+  const resumeUrl = paths[locale].resume;
+
   return (
     <div className="mx-auto w-full max-w-4xl px-6">
       {/* Header */}
@@ -102,14 +40,15 @@ export default function Home() {
           </a>
           <div className="flex items-center gap-5 text-sm text-muted">
             <a href="#skills" className="hover:text-accent">
-              Skills
+              {dict.nav.skills}
             </a>
             <a href="#works" className="hover:text-accent">
-              Works
+              {dict.nav.works}
             </a>
             <a href="#contact" className="hover:text-accent">
-              Contact
+              {dict.nav.contact}
             </a>
+            <LocaleSwitch locale={locale} page="home" />
           </div>
         </nav>
       </header>
@@ -118,28 +57,20 @@ export default function Home() {
         {/* Hero */}
         <section className="flex items-start justify-between gap-8 pt-16 sm:pt-24">
           <div>
-            <p className="font-mono text-accent">
-              Web Engineer — Backend / Infrastructure
-            </p>
+            <p className="font-mono text-accent">{dict.hero.role}</p>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold leading-tight text-heading">
-              田矢 凌太
+              {dict.hero.name}
               <span className="ml-3 text-xl sm:text-2xl font-medium text-muted">
-                Ryota Taya
+                {dict.hero.nameSub}
               </span>
             </h1>
-            <p className="mt-6 max-w-2xl leading-relaxed">
-              Python／Django を中心とした Web バックエンド開発、AWS
-              を利用したインフラ構築・運用、Stripe
-              を利用した決済機能の開発を得意とするエンジニアです。現在は Next.js
-              や SwiftUI、AI コーディングエージェントも活用し、Web サービスと iOS
-              アプリの個人開発にも取り組んでいます。
-            </p>
+            <p className="mt-6 max-w-2xl leading-relaxed">{dict.hero.intro}</p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href={RESUME_URL}
+                href={resumeUrl}
                 className="bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0d4a8c] dark:bg-mint dark:text-navy dark:hover:bg-[#54eebc]"
               >
-                職務経歴書を見る
+                {dict.hero.resumeCta}
               </a>
               <a
                 href={GITHUB_URL}
@@ -158,26 +89,26 @@ export default function Home() {
 
         {/* Skills */}
         <section>
-          <SectionHeading id="skills" sub="Skills" title="テクニカルスキル" />
+          <SectionHeading id="skills" sub={dict.skills.sub} title={dict.skills.title} />
           <div className="mt-6 flex flex-wrap gap-2">
-            {coreSkills.map((skill) => (
+            {dict.skills.items.map((skill) => (
               <Tag key={skill}>{skill}</Tag>
             ))}
           </div>
           <p className="mt-4 text-sm text-muted">
-            スキルの一覧と詳細な経験区分は
-            <a href={RESUME_URL} className="mx-1 text-accent hover:underline">
-              職務経歴書
+            {dict.skills.note.before}
+            <a href={resumeUrl} className="mx-1 text-accent hover:underline">
+              {dict.skills.note.link}
             </a>
-            を参照してください。
+            {dict.skills.note.after}
           </p>
         </section>
 
         {/* Works */}
         <section>
-          <SectionHeading id="works" sub="Works" title="個人開発" />
+          <SectionHeading id="works" sub={dict.works.sub} title={dict.works.title} />
           <div className="mt-8 flex flex-col gap-5">
-            {works.map((work) => (
+            {dict.works.entries.map((work) => (
               <div
                 key={work.title}
                 className="border border-line border-l-4 border-l-cyan bg-surface p-6"
@@ -207,11 +138,11 @@ export default function Home() {
                 {work.demo && (
                   <div className="mt-4 bg-inset px-4 py-3 text-sm text-muted">
                     <p>
-                      デモアカウント：
+                      {dict.works.demoLabel}
                       <code className="font-mono text-foreground">
                         {work.demo.email}
                       </code>
-                      <span className="mx-1">／</span>
+                      <span className="mx-1">{dict.works.demoSeparator}</span>
                       <code className="font-mono text-foreground">
                         {work.demo.password}
                       </code>
@@ -227,28 +158,28 @@ export default function Home() {
                     className="mt-4 w-full border border-line"
                     src={work.videoSrc}
                   >
-                    お使いのブラウザは動画再生に対応していません。
+                    {dict.works.videoFallback}
                   </video>
                 )}
               </div>
             ))}
           </div>
           <p className="mt-4 text-sm text-muted">
-            各作品の担当工程・実装内容の詳細は
-            <a href={RESUME_URL} className="mx-1 text-accent hover:underline">
-              職務経歴書
+            {dict.works.note.before}
+            <a href={resumeUrl} className="mx-1 text-accent hover:underline">
+              {dict.works.note.link}
             </a>
-            を参照してください。
+            {dict.works.note.after}
           </p>
         </section>
 
         {/* Contact */}
         <section>
-          <SectionHeading id="contact" sub="Contact" title="連絡先・リンク" />
+          <SectionHeading id="contact" sub={dict.contact.sub} title={dict.contact.title} />
           <ul className="mt-6 flex flex-col gap-3">
             <li>
               <span className="mr-3 inline-block w-28 text-sm text-muted">
-                Email
+                {dict.contact.emailLabel}
               </span>
               <a href={`mailto:${EMAIL}`} className="text-accent hover:underline">
                 {EMAIL}
@@ -256,7 +187,7 @@ export default function Home() {
             </li>
             <li>
               <span className="mr-3 inline-block w-28 text-sm text-muted">
-                GitHub
+                {dict.contact.githubLabel}
               </span>
               <a
                 href={GITHUB_URL}
@@ -269,10 +200,10 @@ export default function Home() {
             </li>
             <li>
               <span className="mr-3 inline-block w-28 text-sm text-muted">
-                職務経歴書
+                {dict.contact.resumeLabel}
               </span>
-              <a href={RESUME_URL} className="text-accent hover:underline">
-                職務経歴書を見る
+              <a href={resumeUrl} className="text-accent hover:underline">
+                {dict.contact.resumeLinkText}
               </a>
             </li>
           </ul>

@@ -1,26 +1,16 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { Metadata } from "next";
 import Link from "next/link";
-import { BlockLogo } from "../block-logo";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { BlockLogo } from "./block-logo";
+import { LocaleSwitch } from "./locale-switch";
+import { paths, resumeDictionaries, type Locale } from "@/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "職務経歴書 | Ryota Taya",
-  description: "田矢 凌太（Ryota Taya）の職務経歴書",
-  // 経歴書は portfolio 本体より詳細なため検索エンジンには載せない
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    googleBot: { index: false, follow: false },
-  },
-};
-
-export default async function ResumePage() {
+export async function ResumePage({ locale }: { locale: Locale }) {
+  const dict = resumeDictionaries[locale];
   const source = await fs.readFile(
-    path.join(process.cwd(), "src/content/resume.md"),
+    path.join(process.cwd(), "src/content", dict.sourceFile),
     "utf8",
   );
 
@@ -29,7 +19,7 @@ export default async function ResumePage() {
       <header className="sticky top-0 z-10 -mx-6 border-b border-line bg-[var(--background)]/85 px-6 py-4 backdrop-blur print:hidden">
         <nav className="flex items-center justify-between">
           <Link
-            href="/"
+            href={paths[locale].home}
             className="flex items-center gap-2 font-bold tracking-wide text-heading"
           >
             <BlockLogo size={18} />
@@ -37,15 +27,16 @@ export default async function ResumePage() {
           </Link>
           <div className="flex items-center gap-5 text-sm text-muted">
             <a
-              href="/resume.pdf"
-              download="職務経歴書_田矢凌太.pdf"
+              href={paths[locale].resumePdf}
+              download={dict.pdfDownloadName}
               className="hover:text-accent"
             >
-              PDF をダウンロード
+              {dict.pdfLink}
             </a>
-            <Link href="/" className="hover:text-accent">
-              ← ポートフォリオへ戻る
+            <Link href={paths[locale].home} className="hover:text-accent">
+              {dict.backLink}
             </Link>
+            <LocaleSwitch locale={locale} page="resume" />
           </div>
         </nav>
       </header>

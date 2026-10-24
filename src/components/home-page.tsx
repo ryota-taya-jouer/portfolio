@@ -1,21 +1,11 @@
 import { BlockLogo } from "./block-logo";
 import { LocaleSwitch } from "./locale-switch";
+import { SectionHeading } from "./section-heading";
+import { ServicesSection } from "./services-section";
 import { homeDictionaries, paths, type Locale } from "@/i18n/dictionaries";
 
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
 const EMAIL = "ryota.taya@jouerworld.com";
-
-function SectionHeading({ id, title, sub }: { id: string; title: string; sub: string }) {
-  return (
-    <div id={id} className="scroll-mt-24">
-      <p className="font-mono text-sm tracking-widest text-accent uppercase">
-        <span className="mr-2.5 inline-block h-2.5 w-2.5 bg-mint" aria-hidden="true" />
-        {sub}
-      </p>
-      <h2 className="mt-1 text-2xl sm:text-3xl font-bold text-heading">{title}</h2>
-    </div>
-  );
-}
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
@@ -39,11 +29,15 @@ export function HomePage({ locale }: { locale: Locale }) {
             Ryota Taya
           </a>
           <div className="flex items-center gap-5 text-sm text-muted">
-            <a href="#skills" className="hover:text-accent">
+            {/* 狭い画面では Services を優先し、Skills を省く */}
+            <a href="#skills" className="hidden hover:text-accent sm:inline">
               {dict.nav.skills}
             </a>
             <a href="#works" className="hover:text-accent">
               {dict.nav.works}
+            </a>
+            <a href="#services" className="hover:text-accent">
+              {dict.nav.services}
             </a>
             <a href="#contact" className="hover:text-accent">
               {dict.nav.contact}
@@ -67,8 +61,14 @@ export function HomePage({ locale }: { locale: Locale }) {
             <p className="mt-6 max-w-2xl leading-relaxed">{dict.hero.intro}</p>
             <div className="mt-8 flex flex-wrap gap-4">
               <a
-                href={resumeUrl}
+                href="#services"
                 className="bg-navy px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0d4a8c] dark:bg-mint dark:text-navy dark:hover:bg-[#54eebc]"
+              >
+                {dict.hero.servicesCta}
+              </a>
+              <a
+                href={resumeUrl}
+                className="border-2 border-navy px-5 py-2.5 text-sm font-medium text-navy hover:border-accent hover:text-accent dark:border-line dark:text-foreground dark:hover:border-accent dark:hover:text-accent"
               >
                 {dict.hero.resumeCta}
               </a>
@@ -172,6 +172,9 @@ export function HomePage({ locale }: { locale: Locale }) {
             {dict.works.note.after}
           </p>
         </section>
+
+        {/* Services */}
+        <ServicesSection dict={dict.services} email={EMAIL} />
 
         {/* Contact */}
         <section>

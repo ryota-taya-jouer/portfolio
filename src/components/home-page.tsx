@@ -28,8 +28,8 @@ export function HomePage({ locale }: { locale: Locale }) {
             <BlockLogo size={18} />
             Ryota Taya
           </a>
-          <div className="flex items-center gap-5 text-sm text-muted">
-            {/* 狭い画面では Services を優先し、Skills を省く */}
+          <div className="flex items-center gap-3 text-sm text-muted sm:gap-5">
+            {/* 狭い画面では Works・Services だけを出す（Contact は Services の直下にあり、Services にもメール導線がある） */}
             <a href="#skills" className="hidden hover:text-accent sm:inline">
               {dict.nav.skills}
             </a>
@@ -39,7 +39,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             <a href="#services" className="hover:text-accent">
               {dict.nav.services}
             </a>
-            <a href="#contact" className="hover:text-accent">
+            <a href="#contact" className="hidden hover:text-accent sm:inline">
               {dict.nav.contact}
             </a>
             <LocaleSwitch locale={locale} page="home" />

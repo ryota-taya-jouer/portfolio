@@ -137,12 +137,15 @@ export function HomePage({ locale }: { locale: Locale }) {
                 )}
                 {work.demo && (
                   <div className="mt-4 bg-inset px-4 py-3 text-sm text-muted">
-                    <p>
+                    {/* 英語は空白がないと1語扱いで折り返せないため、区切りの前後に改行位置を入れ、収まらない語は途中で折る */}
+                    <p className="wrap-anywhere">
                       {dict.works.demoLabel}
                       <code className="font-mono text-foreground">
                         {work.demo.email}
                       </code>
+                      <wbr />
                       <span className="mx-1">{dict.works.demoSeparator}</span>
+                      <wbr />
                       <code className="font-mono text-foreground">
                         {work.demo.password}
                       </code>

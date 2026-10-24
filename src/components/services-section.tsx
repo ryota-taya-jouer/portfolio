@@ -82,17 +82,23 @@ export function ServicesSection({ dict, email }: { dict: ServicesDictionary; ema
       {/* ご依頼の流れ */}
       <div className="mt-12">
         <h3 className="text-lg font-bold text-heading">{dict.flowTitle}</h3>
-        <ol className="mt-4 grid gap-3 sm:grid-cols-4">
+        {/* 狭い画面では番号を左に置いた横並びにして縦の長さを抑える */}
+        <ol className="mt-4 grid gap-2 sm:grid-cols-4 sm:gap-3">
           {dict.flow.map((step, i) => (
-            <li key={step.title} className="border border-line bg-surface p-4">
+            <li
+              key={step.title}
+              className="flex gap-3 border border-line bg-surface px-4 py-3 sm:block sm:p-4"
+            >
               <span
-                className="inline-flex h-7 w-7 items-center justify-center bg-mint font-mono text-sm font-bold text-navy"
+                className="inline-flex h-7 w-7 shrink-0 items-center justify-center bg-mint font-mono text-sm font-bold text-navy"
                 aria-hidden="true"
               >
                 {i + 1}
               </span>
-              <p className="mt-3 font-bold text-heading">{step.title}</p>
-              <p className="mt-1 text-sm text-muted">{step.description}</p>
+              <div>
+                <p className="font-bold text-heading sm:mt-3">{step.title}</p>
+                <p className="mt-1 text-sm text-muted">{step.description}</p>
+              </div>
             </li>
           ))}
         </ol>

@@ -345,7 +345,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
     works: {
       sub: "Works",
       title: "Personal Projects",
-      demoLabel: "Demo account:",
+      demoLabel: "Demo account: ",
       demoSeparator: "/",
       videoFallback: "Your browser does not support video playback.",
       note: {

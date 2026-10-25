@@ -34,6 +34,8 @@ export type WorkEntry = {
 
 /** お仕事のご依頼：提供メニュー1件分 */
 export type ServiceMenu = {
+  /** 言語に依存しない識別子（アクセス解析でメニューを区別するのに使う） */
+  id: string;
   title: string;
   description: string;
   /** 「こんなご相談に」の例 */
@@ -217,6 +219,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
       menuCta: "この内容で相談する",
       menus: [
         {
+          id: "stripe",
           title: "Stripe 決済の導入・不具合調査",
           description:
             "カード決済・継続課金（サブスクリプション）・請求書発行などの導入と、既存の決済処理の不具合調査・改修を行います。Webhook の取りこぼし、二重決済、決済失敗時の再試行など、異常系の対応を得意としています。",
@@ -231,6 +234,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
           ],
         },
         {
+          id: "django-aws",
           title: "Django／AWS の保守・改善",
           description:
             "既存の Django アプリケーションの機能追加・不具合修正と、AWS 上のシステムの運用改善を行います。ログからの障害調査、定期バッチの Lambda 化、テストや GitHub Actions による自動デプロイの導入にも対応します。",
@@ -245,6 +249,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
           ],
         },
         {
+          id: "web-dev",
           title: "小規模 Web サービスの開発",
           description:
             "会員登録・予約・決済などを含む小規模な Web サービスや管理画面を、要件整理から設計・実装・AWS へのデプロイまで一人で担当します。個人開発の SoloOps と同じ構成（Django REST Framework＋Next.js）で開発できます。",
@@ -406,6 +411,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
       menuCta: "Ask about this",
       menus: [
         {
+          id: "stripe",
           title: "Stripe payments: integration & troubleshooting",
           description:
             "I integrate card payments, subscriptions, and invoicing, and investigate and fix issues in existing payment flows. I specialize in failure cases such as missed webhooks, duplicate charges, and retries after failed payments.",
@@ -420,6 +426,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
           ],
         },
         {
+          id: "django-aws",
           title: "Django / AWS maintenance & improvements",
           description:
             "I add features to and fix bugs in existing Django applications, and improve how systems run on AWS. This includes tracing incidents through logs, moving scheduled jobs to Lambda, and introducing tests and automated deployment with GitHub Actions.",
@@ -434,6 +441,7 @@ export const homeDictionaries: Record<Locale, HomeDictionary> = {
           ],
         },
         {
+          id: "web-dev",
           title: "Small web service development",
           description:
             "I build small web services and admin tools with sign-up, booking, or payments, handling everything from requirements and design to implementation and deployment on AWS. I can use the same stack as my SoloOps project (Django REST Framework + Next.js).",

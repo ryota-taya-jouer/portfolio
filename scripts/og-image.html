@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- SNS 共有用の OGP 画像（1200×630）のテンプレート。?lang=ja|en で文言を切り替える。
+     npm run og で public/og.png・public/og-en.png を書き出す（scripts/generate-og-image.mjs）。 -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: #0a3a6e;
+    color: #ffffff;
+    font-family: "Hiragino Sans", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .frame { position: absolute; inset: 72px 80px; display: flex; flex-direction: column; }
+  .role {
+    font-family: "SF Mono", Menlo, "DejaVu Sans Mono", monospace;
+    font-size: 26px; letter-spacing: 0.04em; color: #1fe3a4;
+    display: flex; align-items: center;
+  }
+  .role .sq { display: inline-block; width: 16px; height: 16px; background: #1fe3a4; margin-right: 16px; }
+  .name { margin-top: 28px; font-size: 92px; font-weight: 700; line-height: 1.1; letter-spacing: 0.02em; }
+  .name .sub { display: block; margin-top: 10px; font-size: 40px; font-weight: 500; color: #a9c4de; letter-spacing: 0.02em; }
+  .services { margin-top: auto; }
+  .tags { display: flex; gap: 14px; flex-wrap: wrap; }
+  .tag { border: 2px solid rgba(255,255,255,0.35); padding: 8px 18px; font-size: 26px; font-weight: 500; }
+  .cta { margin-top: 26px; display: flex; align-items: center; justify-content: space-between; }
+  .cta .open { background: #1fe3a4; color: #0a3a6e; font-weight: 700; font-size: 30px; padding: 12px 26px; }
+  .cta .url { font-family: "SF Mono", Menlo, "DejaVu Sans Mono", monospace; font-size: 24px; color: #a9c4de; }
+  svg.logo { position: absolute; right: 80px; top: 72px; }
+</style>
+</head>
+<body>
+  <svg class="logo" width="150" height="212" viewBox="160 120 192 272" aria-hidden="true">
+    <rect x="256" y="120" width="96" height="96" fill="#1fe3a4" />
+    <rect x="256" y="216" width="96" height="176" fill="#2e6db4" />
+    <rect x="160" y="296" width="96" height="96" fill="#1690c8" />
+  </svg>
+  <div class="frame">
+    <p class="role"><span class="sq"></span>Web Engineer — Backend / Infrastructure</p>
+    <h1 class="name" id="name"></h1>
+    <div class="services">
+      <div class="tags" id="tags"></div>
+      <div class="cta">
+        <span class="open" id="open"></span>
+        <span class="url">portfolio.jouerworld.com</span>
+      </div>
+    </div>
+  </div>
+<script>
+  const copy = {
+    ja: {
+      name: '田矢 凌太<span class="sub">Ryota Taya</span>',
+      tags: ['Stripe 決済', 'Python／Django', 'AWS', 'Next.js'],
+      open: 'お仕事のご依頼を受け付けています',
+    },
+    en: {
+      name: 'Ryota Taya<span class="sub">田矢 凌太</span>',
+      tags: ['Stripe payments', 'Python / Django', 'AWS', 'Next.js'],
+      open: 'Available for freelance work',
+    },
+  };
+  const c = copy[new URLSearchParams(location.search).get('lang') || 'ja'];
+  document.getElementById('name').innerHTML = c.name;
+  document.getElementById('tags').innerHTML = c.tags.map((t) => `<span class="tag">${t}</span>`).join('');
+  document.getElementById('open').textContent = c.open;
+</script>
+</body>
+</html>

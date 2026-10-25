@@ -1,6 +1,7 @@
 import { CopyButton } from "./copy-button";
 import { SectionHeading } from "./section-heading";
-import type { ServicesDictionary } from "@/i18n/dictionaries";
+import { TrackedMailLink } from "./tracked-mail-link";
+import type { Locale, ServicesDictionary } from "@/i18n/dictionaries";
 
 /** 依頼テンプレート入りの mailto リンクを組み立てる。topic はメニュー別の相談時に「ご依頼内容」へ差し込む */
 function buildMailto(email: string, mail: ServicesDictionary["mail"], topic?: string) {
@@ -11,7 +12,15 @@ function buildMailto(email: string, mail: ServicesDictionary["mail"], topic?: st
   return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${body}\r\n`)}`;
 }
 
-export function ServicesSection({ dict, email }: { dict: ServicesDictionary; email: string }) {
+export function ServicesSection({
+  dict,
+  email,
+  locale,
+}: {
+  dict: ServicesDictionary;
+  email: string;
+  locale: Locale;
+}) {
   return (
     <section>
       <SectionHeading id="services" sub={dict.sub} title={dict.title} />
@@ -21,7 +30,7 @@ export function ServicesSection({ dict, email }: { dict: ServicesDictionary; ema
       <div className="mt-8 flex flex-col gap-5">
         {dict.menus.map((menu) => (
           <article
-            key={menu.title}
+            key={menu.id}
             className="border border-line border-l-4 border-l-mint bg-surface p-6"
           >
             <div className="flex flex-col gap-5 sm:flex-row sm:justify-between sm:gap-8">
@@ -52,12 +61,13 @@ export function ServicesSection({ dict, email }: { dict: ServicesDictionary; ema
                 </dl>
               </div>
             </div>
-            <a
+            <TrackedMailLink
               href={buildMailto(email, dict.mail, menu.title)}
+              track={{ method: "mail", placement: "service_menu", service: menu.id, locale }}
               className="mt-5 inline-block text-sm font-medium text-accent hover:underline"
             >
               {dict.menuCta} →
-            </a>
+            </TrackedMailLink>
           </article>
         ))}
       </div>
@@ -109,16 +119,18 @@ export function ServicesSection({ dict, email }: { dict: ServicesDictionary; ema
         <h3 className="text-xl font-bold">{dict.cta.title}</h3>
         <p className="mt-3 max-w-2xl leading-relaxed text-white/85">{dict.cta.description}</p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <a
+          <TrackedMailLink
             href={buildMailto(email, dict.mail)}
+            track={{ method: "mail", placement: "services_cta", service: "general", locale }}
             className="bg-mint px-5 py-2.5 text-sm font-bold text-navy hover:bg-[#54eebc]"
           >
             {dict.cta.mailButton}
-          </a>
+          </TrackedMailLink>
           <CopyButton
             text={email}
             label={dict.cta.copyButton}
             copiedLabel={dict.cta.copiedLabel}
+            track={{ method: "copy", placement: "services_cta", service: "general", locale }}
             className="border border-white/50 px-5 py-2.5 text-sm font-medium text-white hover:border-mint hover:text-mint"
           />
         </div>

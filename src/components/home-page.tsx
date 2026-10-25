@@ -2,6 +2,7 @@ import { BlockLogo } from "./block-logo";
 import { LocaleSwitch } from "./locale-switch";
 import { SectionHeading } from "./section-heading";
 import { ServicesSection } from "./services-section";
+import { TrackedMailLink } from "./tracked-mail-link";
 import { homeDictionaries, paths, type Locale } from "@/i18n/dictionaries";
 
 const GITHUB_URL = "https://github.com/ryota-taya-jouer";
@@ -177,7 +178,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         {/* Services */}
-        <ServicesSection dict={dict.services} email={EMAIL} />
+        <ServicesSection dict={dict.services} email={EMAIL} locale={locale} />
 
         {/* Contact */}
         <section>
@@ -187,9 +188,13 @@ export function HomePage({ locale }: { locale: Locale }) {
               <span className="mr-3 inline-block w-28 text-sm text-muted">
                 {dict.contact.emailLabel}
               </span>
-              <a href={`mailto:${EMAIL}`} className="text-accent hover:underline">
+              <TrackedMailLink
+                href={`mailto:${EMAIL}`}
+                track={{ method: "mail", placement: "contact", service: "general", locale }}
+                className="text-accent hover:underline"
+              >
                 {EMAIL}
-              </a>
+              </TrackedMailLink>
             </li>
             <li>
               <span className="mr-3 inline-block w-28 text-sm text-muted">
